@@ -1,0 +1,37 @@
+# =========================
+# Folders
+# =========================
+packages/
+bin/
+lib/
+__pycache__/
+.vs/
+.vscode/
+temp/
+tmp/
+Downloaded/
+_SS/
+
+
+# =========================
+# Extensions
+# =========================
+*.dyn.backup
+*.bak
+*_backup.dyn
+*_autosave.dyn
+*.log
+*.pyc
+*.pyo
+*.user
+*.suo
+*.dwl
+*.dwl2
+
+
+# =========================
+# Specific files
+# =========================
+Thumbs.db
+Desktop.ini
+TODO.md
