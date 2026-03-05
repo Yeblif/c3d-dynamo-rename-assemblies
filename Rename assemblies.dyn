@@ -12,7 +12,7 @@
       "Name": "a_F&R - 2_String to replace",
       "Type": "string",
       "Type2": "string",
-      "Value": "test",
+      "Value": "Test",
       "Description": "Creates a string"
     },
     {
@@ -24,7 +24,15 @@
       "Description": "Creates a string"
     }
   ],
-  "Outputs": [],
+  "Outputs": [
+    {
+      "Id": "b8a1d0e1ad244c0fac61b5747544be94",
+      "Name": "Watch",
+      "Type": "string",
+      "InitialValue": "duplicate names found - change not made",
+      "Description": "Visualizes a node's output"
+    }
+  ],
   "Nodes": [
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -133,7 +141,7 @@
       ],
       "Replication": "Disabled",
       "Description": "Creates a string",
-      "InputValue": "test"
+      "InputValue": "Test"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -538,8 +546,8 @@
     },
     {
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
-      "WatchWidth": 200.0,
-      "WatchHeight": 200.0,
+      "WatchWidth": 312.0,
+      "WatchHeight": 38.0,
       "Id": "b8a1d0e1ad244c0fac61b5747544be94",
       "NodeType": "ExtensionNode",
       "Inputs": [
@@ -596,6 +604,45 @@
       "Replication": "Disabled",
       "Description": "Allows for DesignScript code to be authored directly",
       "Code": "a;"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "Id": "a38e2c082af840829f411898ea50ddc6",
+      "NodeType": "CodeBlockNode",
+      "Inputs": [
+        {
+          "Id": "4cb4f2e73c9b49eb9bac552c7e4d99bd",
+          "Name": "x",
+          "Description": "x",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "2b944f66de82474f8470c1837268e949",
+          "Name": "",
+          "Description": "duplicate_error",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "efb5b773c8904bd9b726c73003a10e6e",
+          "Name": "",
+          "Description": "Value of expression at line 2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "duplicate_error = x == null?\"duplicate names found - change not made\":\"no error\";\nduplicate_error[0];"
     }
   ],
   "Connectors": [
@@ -708,21 +755,27 @@
       "IsHidden": "False"
     },
     {
-      "Start": "c06486a646354cc3b65f7db7376a8819",
-      "End": "bd24c1e039444210b204bd7e808b2e1e",
-      "Id": "1accd71836f4477f8c0b0fe49182f826",
-      "IsHidden": "False"
-    },
-    {
       "Start": "dba12b67cb34485b848cce76bafd1d79",
       "End": "be5f47e30d6748a098c0aaf01f1f265c",
       "Id": "99fc04a3a9004f0eabf1aacf9f0a7f7c",
       "IsHidden": "False"
     },
     {
+      "Start": "dba12b67cb34485b848cce76bafd1d79",
+      "End": "4cb4f2e73c9b49eb9bac552c7e4d99bd",
+      "Id": "db909f0068274f53a9b4a31b78d40d6a",
+      "IsHidden": "False"
+    },
+    {
       "Start": "db6bce1205704fb2a56f40f739ccc5ac",
       "End": "1ade59ba6d4e4ff0ba2339dfe8346ebb",
       "Id": "53f87245de0f461eafd836c7086c49d0",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "efb5b773c8904bd9b726c73003a10e6e",
+      "End": "bd24c1e039444210b204bd7e808b2e1e",
+      "Id": "e1e0e44143294e628ce6b0702c9dec60",
       "IsHidden": "False"
     }
   ],
@@ -759,7 +812,7 @@
     {
       "NodeId": "95d7124a-e3f1-4ec4-9859-695b838ef953",
       "Binding": {
-        "GetAssemblies_InClassDecl-1_InFunctionScope-1_Instance0_95d7124a-e3f1-4ec4-9859-695b838ef953": "H4sIAAAAAAAACouuVkpJLElUslIyNDIwcFKqjQUAPZIQBBIAAAA="
+        "GetAssemblies_InClassDecl-1_InFunctionScope-1_Instance0_95d7124a-e3f1-4ec4-9859-695b838ef953": "H4sIAAAAAAAACouuVkpJLElUslIyNDIwMVSqjQUAjzsaiBIAAAA="
       }
     }
   ],
@@ -940,11 +993,11 @@
         "Id": "b8a1d0e1ad244c0fac61b5747544be94",
         "Name": "Watch",
         "IsSetAsInput": false,
-        "IsSetAsOutput": false,
+        "IsSetAsOutput": true,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": 3696.4758451594635,
-        "Y": 1060.3618783245784
+        "X": 4479.367496830068,
+        "Y": 1053.435749597331
       },
       {
         "Id": "683dcc2aa97b447096128d795ad640cc",
@@ -955,6 +1008,16 @@
         "ShowGeometry": true,
         "X": 2230.3810642270996,
         "Y": 1199.515323979182
+      },
+      {
+        "Id": "a38e2c082af840829f411898ea50ddc6",
+        "Name": "Code Block",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 3564.0,
+        "Y": 1041.0
       }
     ],
     "Annotations": [
@@ -977,7 +1040,7 @@
         "FontSize": 36.0,
         "GroupStyleId": "883066aa-1fe2-44a4-9bd1-c3df86bfe9f6",
         "InitialTop": 844.3923822092424,
-        "InitialHeight": 440.20688420319107,
+        "InitialHeight": 298.7051684457897,
         "TextblockHeight": 72.0,
         "Background": "#FFFFB8D8"
       },
@@ -1003,7 +1066,7 @@
         "FontSize": 36.0,
         "GroupStyleId": "00000000-0000-0000-0000-000000000000",
         "InitialTop": 925.5718350379899,
-        "InitialHeight": 421.29661107895583,
+        "InitialHeight": 418.9434889411922,
         "TextblockHeight": 63.0,
         "Background": "#FFC1D676"
       },
@@ -1028,13 +1091,36 @@
         "FontSize": 36.0,
         "GroupStyleId": "00000000-0000-0000-0000-000000000000",
         "InitialTop": 384.20640511821387,
-        "InitialHeight": 464.57131971625745,
+        "InitialHeight": 382.57131971625745,
+        "TextblockHeight": 63.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "a70dd9ae4728485c9a29de0d2981ce02",
+        "Title": "display duplicate error message",
+        "DescriptionText": "Description <Double click here to edit group description>",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "b8a1d0e1ad244c0fac61b5747544be94",
+          "a38e2c082af840829f411898ea50ddc6"
+        ],
+        "HasNestedGroups": false,
+        "Left": 3554.0,
+        "Top": 968.0,
+        "Width": 1324.3674968300684,
+        "Height": 221.4357495973311,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 1041.0,
+        "InitialHeight": 178.4357495973311,
         "TextblockHeight": 63.0,
         "Background": "#FFC1D676"
       }
     ],
-    "X": 38.908407754103905,
-    "Y": 96.67335965639091,
-    "Zoom": 0.34617283384340464
+    "X": -1029.2895259674006,
+    "Y": -546.3202335800604,
+    "Zoom": 0.9540582714378595
   }
 }
