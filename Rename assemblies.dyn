@@ -8,10 +8,186 @@
   },
   "Inputs": [],
   "Outputs": [],
-  "Nodes": [],
-  "Connectors": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "95d7124ae3f14ec49859695b838ef953",
+      "NodeType": "FunctionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d8e3b480a24148a09b9e0e0bd94e901f",
+          "Name": "Assembly[]",
+          "Description": "Assembly[]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.Civil.DynamoNodes.CorridorExtensions.Assembly.GetAssemblies",
+      "Replication": "Auto",
+      "Description": "Returns the Assemblies in the current Document\n\nAssembly.GetAssemblies ( ): Assembly[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "WatchWidth": 337.0,
+      "WatchHeight": 308.0,
+      "Id": "e8d618e235344919a0845143d084c699",
+      "NodeType": "ExtensionNode",
+      "Inputs": [
+        {
+          "Id": "e2809ac277414cc1b60afe97984482ba",
+          "Name": "",
+          "Description": "Node to show output from",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1e71711255844af49a7b5c375fe26b12",
+          "Name": "",
+          "Description": "Node output",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualizes a node's output"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "1ceaf717061047b985d3cc9f8d7b1f33",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "4c90711a62c94959bc34aef7b708b0a4",
+          "Name": "civilObject",
+          "Description": "Autodesk.Civil.DynamoNodes.CivilObject",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "be5f47e30d6748a098c0aaf01f1f265c",
+          "Name": "name",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c110d656ed6c42618ecb9f301698ee79",
+          "Name": "CivilObject",
+          "Description": "CivilObject",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.Civil.DynamoNodes.CivilObject.SetName@string",
+      "Replication": "Auto",
+      "Description": "Set the name of the civil object.\n\nCivilObject.SetName (name: string): CivilObject"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "Id": "4f914165524749e28f5bbbf5d1025c59",
+      "NodeType": "CodeBlockNode",
+      "Inputs": [
+        {
+          "Id": "2697461ed20c43b29df7259d2269f982",
+          "Name": "a",
+          "Description": "a",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "cb073859652044ec944a85e7ed0aff2a",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "a[1];"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "Id": "9a1508c7c62f40ec91d26bea4629a2a6",
+      "NodeType": "CodeBlockNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "825033421e9f4505a934c65f07927d5d",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "\"test\";"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "d8e3b480a24148a09b9e0e0bd94e901f",
+      "End": "e2809ac277414cc1b60afe97984482ba",
+      "Id": "327162ababfb49d4a1bf8f7ba51c3c36",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "d8e3b480a24148a09b9e0e0bd94e901f",
+      "End": "2697461ed20c43b29df7259d2269f982",
+      "Id": "59fb9a5defa742a3b6be0217bcfec81c",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "cb073859652044ec944a85e7ed0aff2a",
+      "End": "4c90711a62c94959bc34aef7b708b0a4",
+      "Id": "a3d660bc82064b6bb24c10fbf71d61be",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "825033421e9f4505a934c65f07927d5d",
+      "End": "be5f47e30d6748a098c0aaf01f1f265c",
+      "Id": "2343be76b8a640439c2f4d15eddbbbcc",
+      "IsHidden": "False"
+    }
+  ],
   "Dependencies": [],
-  "NodeLibraryDependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Civil3DToolkit",
+      "Version": "1.1.32",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "95d7124ae3f14ec49859695b838ef953"
+      ]
+    }
+  ],
+  "EnableLegacyPolyCurveBehavior": true,
   "Thumbnail": "",
   "GraphDocumentationURL": null,
   "ExtensionWorkspaceData": [
@@ -29,13 +205,20 @@
     "warningCount": 0,
     "errorCount": 0
   },
-  "Bindings": [],
+  "Bindings": [
+    {
+      "NodeId": "95d7124a-e3f1-4ec4-9859-695b838ef953",
+      "Binding": {
+        "GetAssemblies_InClassDecl-1_InFunctionScope-1_Instance0_95d7124a-e3f1-4ec4-9859-695b838ef953": "H4sIAAAAAAAACouuVkpJLElUslIyNHRzNlWqjQUARmQZoBIAAAA="
+      }
+    }
+  ],
   "View": {
     "Dynamo": {
       "ScaleFactor": 1.0,
       "HasRunWithoutCrash": true,
       "IsVisibleInDynamoLibrary": true,
-      "Version": "2.17.0.3472",
+      "Version": "3.0.3.7597",
       "RunType": "Manual",
       "RunPeriod": "1000"
     },
@@ -52,10 +235,61 @@
       "UpZ": 0.0
     },
     "ConnectorPins": [],
-    "NodeViews": [],
+    "NodeViews": [
+      {
+        "Id": "95d7124ae3f14ec49859695b838ef953",
+        "Name": "Assembly.GetAssemblies",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 145.5,
+        "Y": 327.0
+      },
+      {
+        "Id": "e8d618e235344919a0845143d084c699",
+        "Name": "Watch",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 506.80853219063624,
+        "Y": 540.5843817135519
+      },
+      {
+        "Id": "1ceaf717061047b985d3cc9f8d7b1f33",
+        "Name": "CivilObject.SetName",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 1005.4637020952191,
+        "Y": 208.89110628565788
+      },
+      {
+        "Id": "4f914165524749e28f5bbbf5d1025c59",
+        "Name": "Code Block",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 463.83692602528856,
+        "Y": 211.0
+      },
+      {
+        "Id": "9a1508c7c62f40ec91d26bea4629a2a6",
+        "Name": "Code Block",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 659.0,
+        "Y": 332.0
+      }
+    ],
     "Annotations": [],
-    "X": 0.0,
-    "Y": 0.0,
-    "Zoom": 1.0
+    "X": -91.37224799954402,
+    "Y": 8.53144467580222,
+    "Zoom": 1.0542982150113265
   }
 }
