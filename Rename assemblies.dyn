@@ -25,10 +25,10 @@
     },
     {
       "Id": "9702e3dcd1214ec397d7cce02ba0e4ec",
-      "Name": "b - Number of characters to remove",
+      "Name": "b - Number of characters to remove from end",
       "Type": "number",
       "Type2": "number",
-      "Value": "4",
+      "Value": "1",
       "MaximumValue": 100.0,
       "MinimumValue": 0.0,
       "StepValue": 1.0,
@@ -50,7 +50,7 @@
       "Id": "b8a1d0e1ad244c0fac61b5747544be94",
       "Name": "Error output message",
       "Type": "string",
-      "InitialValue": "duplicate names found - change not made\nAssembly -, Assem -",
+      "InitialValue": "no error",
       "Description": "Visualizes a node's output"
     }
   ],
@@ -381,7 +381,7 @@
     },
     {
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
-      "WatchWidth": 200.0,
+      "WatchWidth": 80.0,
       "WatchHeight": 200.0,
       "Id": "b8a1d0e1ad244c0fac61b5747544be94",
       "NodeType": "ExtensionNode",
@@ -687,7 +687,7 @@
       ],
       "Replication": "Disabled",
       "Description": "Produces integer values",
-      "InputValue": 4
+      "InputValue": 1
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -856,8 +856,8 @@
       "Outputs": [
         {
           "Id": "f8a6339e81784c2eaee47135d29eb20c",
-          "Name": "Value",
-          "Description": "The selected Value",
+          "Name": "value",
+          "Description": "Selected value",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -1035,6 +1035,133 @@
       "Replication": "Disabled",
       "Description": "Allows for DesignScript code to be authored directly",
       "Code": "\", \";"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "c896c01a562d4038b3ae8d296584a10e",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "6996f15aa9184bce8abaa5a4a3dec593",
+          "Name": "document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "7cbbc07666bb4fd9ace34485845aac8c",
+          "Name": "command",
+          "Description": "string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3448fd2f25c64000b5d9bd4ba8a9f851",
+          "Name": "echoInCommandLine",
+          "Description": "Show the command in the command line?\n\nbool\nDefault value : true",
+          "UsingDefaultValue": true,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "47d25f1c40c0443591c40ca240e5315d",
+          "Name": "bool",
+          "Description": "bool",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Camber.AutoCAD.Document.SendCommand@Autodesk.AutoCAD.DynamoNodes.Document,string,bool",
+      "Replication": "Auto",
+      "Description": "Executes a particular command string. Returns true if the command was executed successfully and false otherwise. Ensure that a space or \\n is included at the end of any string that you wish to be executed.\n\nDocument.SendCommand (document: Document, command: string, echoInCommandLine: bool = true): bool"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "b9cc4f045d14487c9480aca22890315f",
+      "NodeType": "FunctionNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "41e4ad9011b54bddbda301fb4d578eea",
+          "Name": "Document",
+          "Description": "Document",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "Autodesk.AutoCAD.DynamoNodes.Document.Current",
+      "Replication": "Auto",
+      "Description": "Get the current AutoCAD document.\n\nDocument.Current: Document"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "Id": "0c7153ce52bb4b0ba0569849e79972b0",
+      "NodeType": "CodeBlockNode",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "30ca4b75b3df4356bd92af4b138d4b62",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "\"regen \";"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "Id": "82bd61240e2d414fad6c4e544b96532f",
+      "NodeType": "CodeBlockNode",
+      "Inputs": [
+        {
+          "Id": "fe174fdc702048af831b6283b40acb54",
+          "Name": "passthrough",
+          "Description": "passthrough",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "5ada867d80cf4ee8ad1ea422ffebee76",
+          "Name": "waitFor",
+          "Description": "waitFor",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "fbfd1431cea24f1886ba1235781964ee",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "[passthrough,waitFor][0];"
     }
   ],
   "Connectors": [
@@ -1054,6 +1181,12 @@
       "Start": "d8e3b480a24148a09b9e0e0bd94e901f",
       "End": "295ce5ac96f940038b39aed3a3a65395",
       "Id": "ed39d8136fb14aaaa0f6f8071b3f3974",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c110d656ed6c42618ecb9f301698ee79",
+      "End": "5ada867d80cf4ee8ad1ea422ffebee76",
+      "Id": "f9a3160de0a24d20b01e4285e7e99479",
       "IsHidden": "False"
     },
     {
@@ -1259,6 +1392,24 @@
       "End": "f35c77e8153f481eb09dfc4a07f25fa1",
       "Id": "aeae0bc2ee364f639f1514749c05722d",
       "IsHidden": "False"
+    },
+    {
+      "Start": "41e4ad9011b54bddbda301fb4d578eea",
+      "End": "6996f15aa9184bce8abaa5a4a3dec593",
+      "Id": "e9f2c5c8dcf24ca1a082234cdfd8d215",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "30ca4b75b3df4356bd92af4b138d4b62",
+      "End": "fe174fdc702048af831b6283b40acb54",
+      "Id": "b83e15261d8e4957a67769b43bd47aa8",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "fbfd1431cea24f1886ba1235781964ee",
+      "End": "7cbbc07666bb4fd9ace34485845aac8c",
+      "Id": "ca39419444e6439c9b7f15ac07074c85",
+      "IsHidden": "False"
     }
   ],
   "Dependencies": [],
@@ -1269,6 +1420,14 @@
       "ReferenceType": "Package",
       "Nodes": [
         "95d7124ae3f14ec49859695b838ef953"
+      ]
+    },
+    {
+      "Name": "Camber",
+      "Version": "4.2.6",
+      "ReferenceType": "Package",
+      "Nodes": [
+        "c896c01a562d4038b3ae8d296584a10e"
       ]
     }
   ],
@@ -1503,13 +1662,13 @@
       },
       {
         "Id": "9702e3dcd1214ec397d7cce02ba0e4ec",
-        "Name": "b - Number of characters to remove",
+        "Name": "b - Number of characters to remove from end",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": 549.1646537910419,
-        "Y": 2408.8741293880357
+        "X": 526.1962038526669,
+        "Y": 2518.6122790936042
       },
       {
         "Id": "44406efa312d4e8bad3eade0abdf8478",
@@ -1610,6 +1769,46 @@
         "ShowGeometry": true,
         "X": 5415.882793551171,
         "Y": 699.9287899684889
+      },
+      {
+        "Id": "c896c01a562d4038b3ae8d296584a10e",
+        "Name": "Document.SendCommand",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 7530.384682160255,
+        "Y": 2319.610448974596
+      },
+      {
+        "Id": "b9cc4f045d14487c9480aca22890315f",
+        "Name": "Document.Current",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 7160.888737864041,
+        "Y": 2182.612761812805
+      },
+      {
+        "Id": "0c7153ce52bb4b0ba0569849e79972b0",
+        "Name": "Code Block",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 6712.529861000736,
+        "Y": 2352.4080146564856
+      },
+      {
+        "Id": "82bd61240e2d414fad6c4e544b96532f",
+        "Name": "Code Block",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 6993.5511067524085,
+        "Y": 2353.435579708245
       }
     ],
     "Annotations": [
@@ -1658,7 +1857,7 @@
         "FontSize": 36.0,
         "GroupStyleId": "00000000-0000-0000-0000-000000000000",
         "InitialTop": 1385.829579371994,
-        "InitialHeight": 418.9434889411922,
+        "InitialHeight": 418.9434889411923,
         "TextblockHeight": 63.0,
         "Background": "#FFC1D676"
       },
@@ -1676,12 +1875,12 @@
         "HasNestedGroups": false,
         "Left": 6260.05224304519,
         "Top": 828.4722453244556,
-        "Width": 1487.4194962046404,
+        "Width": 1226.4194962046404,
         "Height": 385.0549260495245,
         "FontSize": 36.0,
         "GroupStyleId": "00000000-0000-0000-0000-000000000000",
         "InitialTop": 901.4722453244556,
-        "InitialHeight": 157.4357495973311,
+        "InitialHeight": 159.0549260495245,
         "TextblockHeight": 63.0,
         "Background": "#FFC1D676"
       },
@@ -1705,7 +1904,7 @@
         "FontSize": 36.0,
         "GroupStyleId": "00000000-0000-0000-0000-000000000000",
         "InitialTop": 904.5497323799209,
-        "InitialHeight": 371.590929058587,
+        "InitialHeight": 324.5909290585869,
         "TextblockHeight": 63.0,
         "Background": "#FFC1D676"
       },
@@ -1723,11 +1922,11 @@
         "Left": 2411.352050706774,
         "Top": 581.2971264507138,
         "Width": 342.0,
-        "Height": 440.0,
+        "Height": 214.0,
         "FontSize": 36.0,
         "GroupStyleId": "883066aa-1fe2-44a4-9bd1-c3df86bfe9f6",
         "InitialTop": 663.2971264507138,
-        "InitialHeight": 444.0,
+        "InitialHeight": 145.0,
         "TextblockHeight": 72.0,
         "Background": "#FFFFB8D8"
       },
@@ -1739,7 +1938,6 @@
         "WidthAdjustment": 0.0,
         "HeightAdjustment": 0.0,
         "Nodes": [
-          "9702e3dcd1214ec397d7cce02ba0e4ec",
           "44406efa312d4e8bad3eade0abdf8478",
           "ce67382c3bf24bd799164bc447990a41",
           "9c12740d90a8497ba19fea003a36135d",
@@ -1749,11 +1947,11 @@
         "Left": 280.7435273702131,
         "Top": 1942.9903635431506,
         "Width": 1720.81093713284,
-        "Height": 597.8837658448851,
+        "Height": 450.04380237830355,
         "FontSize": 36.0,
         "GroupStyleId": "00000000-0000-0000-0000-000000000000",
         "InitialTop": 2015.9903635431506,
-        "InitialHeight": 554.8837658448851,
+        "InitialHeight": 537.8837658448851,
         "TextblockHeight": 63.0,
         "Background": "#FFC1D676"
       },
@@ -1776,13 +1974,60 @@
         "FontSize": 36.0,
         "GroupStyleId": "00000000-0000-0000-0000-000000000000",
         "InitialTop": 738.1235490852399,
-        "InitialHeight": 371.5096841198474,
+        "InitialHeight": 289.5096841198475,
+        "TextblockHeight": 63.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "be6728d56104410ca0167695509eca5d",
+        "Title": "UI",
+        "DescriptionText": "Description <Double click here to edit group description>",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "9702e3dcd1214ec397d7cce02ba0e4ec"
+        ],
+        "HasNestedGroups": false,
+        "Left": 516.1962038526669,
+        "Top": 2445.6122790936042,
+        "Width": 432.0,
+        "Height": 205.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "883066aa-1fe2-44a4-9bd1-c3df86bfe9f6",
+        "InitialTop": 2518.6122790936042,
+        "InitialHeight": 162.0,
+        "TextblockHeight": 63.0,
+        "Background": "#FFFFB8D8"
+      },
+      {
+        "Id": "792d8f31b6334b1e9c771a83037e81d9",
+        "Title": "regen",
+        "DescriptionText": "Description <Double click here to edit group description>",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "c896c01a562d4038b3ae8d296584a10e",
+          "b9cc4f045d14487c9480aca22890315f",
+          "0c7153ce52bb4b0ba0569849e79972b0",
+          "82bd61240e2d414fad6c4e544b96532f"
+        ],
+        "HasNestedGroups": false,
+        "Left": 6702.529861000736,
+        "Top": 2109.612761812805,
+        "Width": 1114.854821159519,
+        "Height": 406.99768716179096,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 2182.612761812805,
+        "InitialHeight": 363.99768716179096,
         "TextblockHeight": 63.0,
         "Background": "#FFC1D676"
       }
     ],
-    "X": 215.87892870923656,
-    "Y": 258.9619999430765,
-    "Zoom": 0.11748690545189294
+    "X": -3873.467047692023,
+    "Y": -1103.558864048483,
+    "Zoom": 0.6386327181072471
   }
 }
