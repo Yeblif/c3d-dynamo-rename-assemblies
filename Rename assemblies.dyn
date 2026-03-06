@@ -20,7 +20,7 @@
       "Name": "a - 1_String to be replaced",
       "Type": "string",
       "Type2": "string",
-      "Value": "Assembly",
+      "Value": "Assem",
       "Description": "Creates a string"
     },
     {
@@ -37,12 +37,12 @@
     },
     {
       "Id": "fccbfcdfef704b9eafd8849eb14322c1",
-      "Name": "Select remane type",
+      "Name": "_Select remane type",
       "Type": "selection",
       "Type2": "dropdownSelection",
-      "Value": "b - Remove characters",
+      "Value": "a - Find & Replace",
       "Description": "A dropdown menu with customizable values.",
-      "SelectedIndex": 1
+      "SelectedIndex": 0
     }
   ],
   "Outputs": [
@@ -50,7 +50,7 @@
       "Id": "b8a1d0e1ad244c0fac61b5747544be94",
       "Name": "Error output message",
       "Type": "string",
-      "InitialValue": "no error",
+      "InitialValue": "Duplicate names found - change not made\nTest - (1)",
       "Description": "Visualizes a node's output"
     }
   ],
@@ -230,7 +230,7 @@
       ],
       "Replication": "Disabled",
       "Description": "Creates a string",
-      "InputValue": "Assembly"
+      "InputValue": "Assem"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -381,7 +381,7 @@
     },
     {
       "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
-      "WatchWidth": 80.0,
+      "WatchWidth": 395.0,
       "WatchHeight": 200.0,
       "Id": "b8a1d0e1ad244c0fac61b5747544be94",
       "NodeType": "ExtensionNode",
@@ -848,8 +848,8 @@
           "Item": "remove_char"
         }
       ],
-      "SelectedIndex": 1,
-      "SelectedString": "b - Remove characters",
+      "SelectedIndex": 0,
+      "SelectedString": "a - Find & Replace",
       "Id": "fccbfcdfef704b9eafd8849eb14322c1",
       "NodeType": "ExtensionNode",
       "Inputs": [],
@@ -1453,7 +1453,7 @@
     {
       "NodeId": "95d7124a-e3f1-4ec4-9859-695b838ef953",
       "Binding": {
-        "GetAssemblies_InClassDecl-1_InFunctionScope-1_Instance0_95d7124a-e3f1-4ec4-9859-695b838ef953": "H4sIAAAAAAAACouuVkpJLElUslIyNDIwMVSqjQUAjzsaiBIAAAA="
+        "GetAssemblies_InClassDecl-1_InFunctionScope-1_Instance0_95d7124a-e3f1-4ec4-9859-695b838ef953": "H4sIAAAAAAAACouuVkpJLElUslIyNHRzNlWqjQUARmQZoBIAAAA="
       }
     }
   ],
@@ -1712,7 +1712,7 @@
       },
       {
         "Id": "fccbfcdfef704b9eafd8849eb14322c1",
-        "Name": "Select remane type",
+        "Name": "_Select remane type",
         "IsSetAsInput": true,
         "IsSetAsOutput": false,
         "Excluded": false,
@@ -1875,7 +1875,7 @@
         "HasNestedGroups": false,
         "Left": 6260.05224304519,
         "Top": 828.4722453244556,
-        "Width": 1226.4194962046404,
+        "Width": 1462.4194962046404,
         "Height": 385.0549260495245,
         "FontSize": 36.0,
         "GroupStyleId": "00000000-0000-0000-0000-000000000000",
@@ -1951,7 +1951,7 @@
         "FontSize": 36.0,
         "GroupStyleId": "00000000-0000-0000-0000-000000000000",
         "InitialTop": 2015.9903635431506,
-        "InitialHeight": 537.8837658448851,
+        "InitialHeight": 360.04380237830355,
         "TextblockHeight": 63.0,
         "Background": "#FFC1D676"
       },
@@ -1996,7 +1996,7 @@
         "FontSize": 36.0,
         "GroupStyleId": "883066aa-1fe2-44a4-9bd1-c3df86bfe9f6",
         "InitialTop": 2518.6122790936042,
-        "InitialHeight": 162.0,
+        "InitialHeight": 145.0,
         "TextblockHeight": 63.0,
         "Background": "#FFFFB8D8"
       },
@@ -2021,13 +2021,35 @@
         "FontSize": 36.0,
         "GroupStyleId": "00000000-0000-0000-0000-000000000000",
         "InitialTop": 2182.612761812805,
-        "InitialHeight": 363.99768716179096,
+        "InitialHeight": 315.82281789544004,
+        "TextblockHeight": 63.0,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "425af971592446e6b749502edb4c4d53",
+        "Title": "output based on selected rename type",
+        "DescriptionText": "Description <Double click here to edit group description>",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "b88a2571e7964805bebbb53d7afe164b"
+        ],
+        "HasNestedGroups": false,
+        "Left": 3247.3112870695136,
+        "Top": 1320.2452453673125,
+        "Width": 702.0,
+        "Height": 270.0,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 1393.2452453673125,
+        "InitialHeight": 227.0,
         "TextblockHeight": 63.0,
         "Background": "#FFC1D676"
       }
     ],
-    "X": -3873.467047692023,
-    "Y": -1103.558864048483,
-    "Zoom": 0.6386327181072471
+    "X": 174.85593226177355,
+    "Y": 489.4828646039573,
+    "Zoom": 0.17037674772655464
   }
 }
