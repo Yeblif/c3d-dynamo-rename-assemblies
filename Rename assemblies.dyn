@@ -28,7 +28,7 @@
       "Name": "b - Number of characters to remove from end",
       "Type": "number",
       "Type2": "number",
-      "Value": "1",
+      "Value": "3",
       "MaximumValue": 100.0,
       "MinimumValue": 0.0,
       "StepValue": 1.0,
@@ -50,7 +50,7 @@
       "Id": "b8a1d0e1ad244c0fac61b5747544be94",
       "Name": "Error output message",
       "Type": "string",
-      "InitialValue": "Duplicate names found - the following where not changed\nTest - (1), Assem - (1)",
+      "InitialValue": "Duplicate names found - the following where not changed\nAssem - (2\nAssem - (4\nAssem - (1\nAssembly - (1\nAssembly - (3",
       "Description": "Visualizes a node's output"
     }
   ],
@@ -492,7 +492,7 @@
       ],
       "Replication": "Disabled",
       "Description": "Produces integer values",
-      "InputValue": 1
+      "InputValue": 3
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -828,7 +828,7 @@
       "Inputs": [],
       "Outputs": [
         {
-          "Id": "43e7ff6dbaba41d9bba66ab47e273e68",
+          "Id": "4f6b32bf5089418e9cce7c35c24e050c",
           "Name": "",
           "Description": "Value of expression at line 1",
           "UsingDefaultValue": false,
@@ -839,7 +839,7 @@
       ],
       "Replication": "Disabled",
       "Description": "Allows for DesignScript code to be authored directly",
-      "Code": "\", \";"
+      "Code": "\"\\n\";"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
@@ -1867,9 +1867,9 @@
       "IsHidden": "False"
     },
     {
-      "Start": "43e7ff6dbaba41d9bba66ab47e273e68",
+      "Start": "4f6b32bf5089418e9cce7c35c24e050c",
       "End": "f35c77e8153f481eb09dfc4a07f25fa1",
-      "Id": "444f31dc4c274b94a63c3b0f539748f5",
+      "Id": "d11c2b7dc598489d8d5d2ae925e089b4",
       "IsHidden": "False"
     },
     {
@@ -3039,8 +3039,8 @@
         "Background": "#FFA4E1FF"
       }
     ],
-    "X": 304.820216740708,
-    "Y": 424.0988752456286,
-    "Zoom": 0.12643212169708193
+    "X": -838.1674345622819,
+    "Y": -19.91891624322443,
+    "Zoom": 0.8811691040633343
   }
 }
