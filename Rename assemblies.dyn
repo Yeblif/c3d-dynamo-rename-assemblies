@@ -45,9 +45,9 @@
       "Name": "2_Select remane type",
       "Type": "selection",
       "Type2": "dropdownSelection",
-      "Value": "a - Find & Replace",
+      "Value": "b - Remove characters",
       "Description": "A dropdown menu with customizable values.",
-      "SelectedIndex": 0
+      "SelectedIndex": 1
     },
     {
       "Id": "e224cf666f9c40b693f6f97f41e56e50",
@@ -72,7 +72,7 @@
       "Id": "b8a1d0e1ad244c0fac61b5747544be94",
       "Name": "Error output message",
       "Type": "string",
-      "InitialValue": "not changed: \nTest - (1) -x-> Test - (1)\nAssem - (1) -x-> Test - (1)\n\nchanged: \nnone",
+      "InitialValue": "Selected action: \nremove 1 character/s from end\n\nNot changed: \nnone\n\nChanged: \n'Test - (' ---> 'Test - '\n'Assem - (' ---> 'Assem - '",
       "Description": "Visualizes a node's output"
     }
   ],
@@ -498,8 +498,8 @@
           "Item": "remove_char"
         }
       ],
-      "SelectedIndex": 0,
-      "SelectedString": "a - Find & Replace",
+      "SelectedIndex": 1,
+      "SelectedString": "b - Remove characters",
       "Id": "fccbfcdfef704b9eafd8849eb14322c1",
       "NodeType": "ExtensionNode",
       "Inputs": [],
@@ -523,7 +523,7 @@
       "NodeType": "CodeBlockNode",
       "Inputs": [
         {
-          "Id": "031cce1016274b34ad245c135ee9418b",
+          "Id": "0fb87ced63c146848b0c5e7c3451755b",
           "Name": "rename_type",
           "Description": "rename_type",
           "UsingDefaultValue": false,
@@ -532,18 +532,36 @@
           "KeepListStructure": false
         },
         {
-          "Id": "6333248358ba4f628f1cf16b9c9fbeba",
-          "Name": "f_and_r_action",
-          "Description": "f_and_r_action",
+          "Id": "3f95756c095f4a45804a1a12c3ea6b05",
+          "Name": "f_and_r_action_string",
+          "Description": "f_and_r_action_string",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
           "KeepListStructure": false
         },
         {
-          "Id": "84e6a5b78f7e4c82967677a77d80cf30",
-          "Name": "remove_char_action",
-          "Description": "remove_char_action",
+          "Id": "6ddb8ff0571a4f01a98cc2b94fcc787b",
+          "Name": "remove_char_action_st...",
+          "Description": "remove_char_action_string",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "427d54bc3e0c402f895cd36e2241d240",
+          "Name": "f_and_r_names",
+          "Description": "f_and_r_names",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "0de4575c880b4d48a09acc0a7a96e1c0",
+          "Name": "remove_char_names",
+          "Description": "remove_char_names",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -552,9 +570,18 @@
       ],
       "Outputs": [
         {
-          "Id": "6e20ad83eadc45c7b889add20ff652d5",
+          "Id": "98143a00b63f46ed8db15638ddecf7a8",
           "Name": "",
-          "Description": "Value of expression at line 1",
+          "Description": "Value of expression at line 2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ff1d08d4fe024f40b3e8ecd0eea0cd95",
+          "Name": "",
+          "Description": "Value of expression at line 4",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -563,7 +590,7 @@
       ],
       "Replication": "Disabled",
       "Description": "Allows for DesignScript code to be authored directly",
-      "Code": "rename_type == \"f_and_r\"?f_and_r_action:remove_char_action;"
+      "Code": "//output relevant action string\nrename_type == \"f_and_r\"?f_and_r_action_string:remove_char_action_string;\n//output relevant name list\nrename_type == \"f_and_r\"?f_and_r_names:remove_char_names;"
     },
     {
       "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
@@ -2734,7 +2761,7 @@
     },
     {
       "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
-      "Code": "duplicate_unique_list_empty = IN[0]\r\nname_concat_string = IN[1]\r\n\r\n# message if any lists are empty\r\nany_if_empty = \"none\"\r\n\r\n# not changed list\r\nnot_changed_if_has_data = any_if_empty if duplicate_unique_list_empty[0] else str(name_concat_string[0])\r\n\r\nnot_changed_list = \"not changed: \\n\" + not_changed_if_has_data\r\n\r\n# changed list\r\nchanged_if_has_data = any_if_empty if duplicate_unique_list_empty[1] else str(name_concat_string[1])\r\n\r\nchanged_list = \"changed: \\n\" + changed_if_has_data\r\n\r\n# output message\r\nOUT = not_changed_list + \"\\n\\n\" + changed_list",
+      "Code": "duplicate_unique_list_empty = IN[0]\r\nrename_action_string = IN[1]\r\nname_concat_string = IN[2]\r\n\r\n# action string\r\naction_string = \"Selected action: \\n\" + rename_action_string\r\n\r\n# conditianally add dummy data to name_concat_string to preserve indices\r\nname_concat_string = (\r\n    [\"temp\"] + name_concat_string \r\n    if duplicate_unique_list_empty[0] \r\n    else name_concat_string\r\n)\r\nname_concat_string = name_concat_string + [\"temp\"]\r\n\r\n# message if any lists are empty\r\nany_if_empty = \"none\"\r\n\r\n# not changed list\r\nnot_changed_data = (\r\n    any_if_empty \r\n    if duplicate_unique_list_empty[0] \r\n    else str(name_concat_string[0])\r\n)\r\n\r\nnot_changed_list = \"Not changed: \\n\" + not_changed_data\r\n\r\n# changed list\r\nchanged_data = (\r\n    any_if_empty \r\n    if duplicate_unique_list_empty[1] \r\n    else str(name_concat_string[1])\r\n)\r\nchanged_list = \"Changed: \\n\" + changed_data\r\n\r\n# output message\r\nOUT = action_string + \"\\n\\n\" + not_changed_list + \"\\n\\n\" + changed_list",
       "Engine": "CPython3",
       "VariableInputPorts": true,
       "Id": "9f78d7ff907b4ce9abc76c75f197e374",
@@ -2751,8 +2778,17 @@
         },
         {
           "Id": "1fd6577c93fa4c3bbeccc178b690d9c2",
-          "Name": "name_concat_string",
+          "Name": "rename_action_string",
           "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d4120955fb4d4385923fcfcd0ce00b3b",
+          "Name": "name_concat_string",
+          "Description": "Input #2",
           "UsingDefaultValue": false,
           "Level": 2,
           "UseLevels": false,
@@ -2772,6 +2808,195 @@
       ],
       "Replication": "Disabled",
       "Description": "Runs an embedded Python script."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "Id": "93f6c67cde2b4b3898a7a9ab28b501be",
+      "NodeType": "CodeBlockNode",
+      "Inputs": [
+        {
+          "Id": "ea77f6ee543d479ebe707f7f3e6dcfb5",
+          "Name": "string_to_be_replaced",
+          "Description": "string_to_be_replaced",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "b0eaed59489d44ac8f1acb73c2cb95fa",
+          "Name": "string_to_replace",
+          "Description": "string_to_replace",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "eb084ad81399409294097cfadbdfeaad",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "\"*\"+string_to_be_replaced+\"*\"+\" --> \"+\"*\"+string_to_replace+\"*\";"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "Id": "0bb807abcc9f4cf5ad355b5d7b61cf8d",
+      "NodeType": "CodeBlockNode",
+      "Inputs": [
+        {
+          "Id": "31c823538c4e42f393f67e492cb3f299",
+          "Name": "no_of_chars_to_remove",
+          "Description": "no_of_chars_to_remove",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "595b444a8b7247c58741fd96d63efba6",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "\"remove \"+no_of_chars_to_remove+\" character/s from end\";"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "Id": "b21eb5e279f14d11aa6afb5eae7c4b8a",
+      "NodeType": "CodeBlockNode",
+      "Inputs": [
+        {
+          "Id": "a5050790b3cf4f0ca421294511a3eb3b",
+          "Name": "a",
+          "Description": "a",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1a63e564a9da4652b9876a7c834191b1",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "a;"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "Id": "ae095b60a613410aae8ccec5859a2498",
+      "NodeType": "CodeBlockNode",
+      "Inputs": [
+        {
+          "Id": "26b410fab77549759b4ab368f5146b9a",
+          "Name": "a",
+          "Description": "a",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "ac954fa08bb84d128279bc6cfa0e1bde",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "a;"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "Id": "73c40316ac8049709848f0b649c39c37",
+      "NodeType": "CodeBlockNode",
+      "Inputs": [
+        {
+          "Id": "6cf2751ae36e40e688fe9aa4010f7c8c",
+          "Name": "list",
+          "Description": "list",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a504b7a003f4474aa41cf479e5a49296",
+          "Name": "",
+          "Description": "Value of expression at line 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Allows for DesignScript code to be authored directly",
+      "Code": "\"'\"+list+\"'\";"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "Id": "ebce88ce0aa84c83b27149292ec9b302",
+      "NodeType": "FunctionNode",
+      "Inputs": [
+        {
+          "Id": "d391c490ecf543c3a96d262b71936d35",
+          "Name": "string",
+          "Description": "String to trim.\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "f6e51689332a4967bdb99e5da88b1988",
+          "Name": "string",
+          "Description": "String with white spaces at end removed.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "FunctionSignature": "DSCore.String.TrimTrailingWhitespace@string",
+      "Replication": "Auto",
+      "Description": "Removes all whitespace from the end of the given string.\n\nString.TrimTrailingWhitespace (string: string): string"
     }
   ],
   "Connectors": [
@@ -2806,15 +3031,27 @@
       "IsHidden": "False"
     },
     {
+      "Start": "7b5e08648a39498ea04193a87d51a248",
+      "End": "b0eaed59489d44ac8f1acb73c2cb95fa",
+      "Id": "16719a9c9181429683a6bb17d11f3383",
+      "IsHidden": "False"
+    },
+    {
       "Start": "a8bca7a2a00f44d29b6cf12a13bb1145",
-      "End": "6333248358ba4f628f1cf16b9c9fbeba",
-      "Id": "6abeeb1f9c0a491baf34996d2306017b",
+      "End": "427d54bc3e0c402f895cd36e2241d240",
+      "Id": "fdeff7bc5514404aba12ebd023d8fcab",
       "IsHidden": "False"
     },
     {
       "Start": "dd6daa8f642b4cf1b79480591ccc2334",
       "End": "10777229e167440f854a87bc356ceb87",
       "Id": "bcc4c5fb1251474494e825c156561a36",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "dd6daa8f642b4cf1b79480591ccc2334",
+      "End": "ea77f6ee543d479ebe707f7f3e6dcfb5",
+      "Id": "55d22a00ab814e058d076c2dd3d10679",
       "IsHidden": "False"
     },
     {
@@ -2833,6 +3070,12 @@
       "Start": "68416b5821a94e748804de8765ee0375",
       "End": "ddf50a10ba084a739efa1f165193f170",
       "Id": "78e0eb9bbb244d288f29e22763939cb4",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "68416b5821a94e748804de8765ee0375",
+      "End": "31c823538c4e42f393f67e492cb3f299",
+      "Id": "a68a185739c94ca690356dc313306968",
       "IsHidden": "False"
     },
     {
@@ -2855,8 +3098,8 @@
     },
     {
       "Start": "521fbfd8b91c41d9b962cdd99afa3599",
-      "End": "84e6a5b78f7e4c82967677a77d80cf30",
-      "Id": "fd2fb062003442429ae51a0ef3c11618",
+      "End": "0de4575c880b4d48a09acc0a7a96e1c0",
+      "Id": "d4159ff933274352a079104f1b141d50",
       "IsHidden": "False"
     },
     {
@@ -2867,26 +3110,32 @@
     },
     {
       "Start": "f8a6339e81784c2eaee47135d29eb20c",
-      "End": "031cce1016274b34ad245c135ee9418b",
-      "Id": "66d301fde13c44caa41f771e94c580ab",
+      "End": "0fb87ced63c146848b0c5e7c3451755b",
+      "Id": "7e8144614cf5405a88c2f7505493a19b",
       "IsHidden": "False"
     },
     {
-      "Start": "6e20ad83eadc45c7b889add20ff652d5",
+      "Start": "98143a00b63f46ed8db15638ddecf7a8",
+      "End": "a5050790b3cf4f0ca421294511a3eb3b",
+      "Id": "d7278f49fc1a40f980754383463c99b6",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "ff1d08d4fe024f40b3e8ecd0eea0cd95",
       "End": "1d3db0e8c8d84066ad4f6303dbebb441",
-      "Id": "eda673618f364f5eb113d51ce262dd29",
+      "Id": "6eae52ebd6ee43b09f064777f85fd20b",
       "IsHidden": "False"
     },
     {
-      "Start": "6e20ad83eadc45c7b889add20ff652d5",
+      "Start": "ff1d08d4fe024f40b3e8ecd0eea0cd95",
       "End": "1a1e17eb75fd4c2198277eae8568f1c2",
-      "Id": "8966cbd0b89a4d2ca834d1a1b61d188a",
+      "Id": "f60350d00f5a49e9809faf9bb246479f",
       "IsHidden": "False"
     },
     {
-      "Start": "6e20ad83eadc45c7b889add20ff652d5",
+      "Start": "ff1d08d4fe024f40b3e8ecd0eea0cd95",
       "End": "79e7b743374e47de9b7dc6c4aab1f8b6",
-      "Id": "88cdb48c9453459798f4b60d138dc06a",
+      "Id": "466b8dbd83e0481081a21441acffd950",
       "IsHidden": "False"
     },
     {
@@ -2933,8 +3182,8 @@
     },
     {
       "Start": "ca5d7a1b25f14ad1908b9726088a4a1e",
-      "End": "be5f47e30d6748a098c0aaf01f1f265c",
-      "Id": "6aa9912fa0ce4886919e928a6a63663f",
+      "End": "d391c490ecf543c3a96d262b71936d35",
+      "Id": "0eca1bda160444f2826d536ee64d3ddc",
       "IsHidden": "False"
     },
     {
@@ -3263,8 +3512,8 @@
     },
     {
       "Start": "61a0381c8e5d4e62a2dcb45dd0f55159",
-      "End": "1fd6577c93fa4c3bbeccc178b690d9c2",
-      "Id": "e6d178c486564677b38c05695397a922",
+      "End": "d4120955fb4d4385923fcfcd0ce00b3b",
+      "Id": "9f6f52cd42a24cdfac207af822449d95",
       "IsHidden": "False"
     },
     {
@@ -3317,8 +3566,8 @@
     },
     {
       "Start": "f7d98dceb3ea42d9ada93d68b4f31a93",
-      "End": "33b69676b97c428fa8aa4c1c07718b92",
-      "Id": "5692f5a1a5714f0cb41b093dc05d163c",
+      "End": "6cf2751ae36e40e688fe9aa4010f7c8c",
+      "Id": "9a582050323c4a98bfa5875efdb99db8",
       "IsHidden": "False"
     },
     {
@@ -3331,6 +3580,42 @@
       "Start": "c04fdc4a22484644a0d7a1b971149f39",
       "End": "bd24c1e039444210b204bd7e808b2e1e",
       "Id": "201984e63a2a44879056db32d32dfc9a",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "eb084ad81399409294097cfadbdfeaad",
+      "End": "3f95756c095f4a45804a1a12c3ea6b05",
+      "Id": "241b5aaeb0ee41138e7e52711bd52492",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "595b444a8b7247c58741fd96d63efba6",
+      "End": "6ddb8ff0571a4f01a98cc2b94fcc787b",
+      "Id": "9abe4f87a5f04b1fb17dcc2961b7cfaf",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "1a63e564a9da4652b9876a7c834191b1",
+      "End": "26b410fab77549759b4ab368f5146b9a",
+      "Id": "abc34d049216447595c65e7f279dce93",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "ac954fa08bb84d128279bc6cfa0e1bde",
+      "End": "1fd6577c93fa4c3bbeccc178b690d9c2",
+      "Id": "f4cf5f5b01ee44b09680c9d33de42638",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "a504b7a003f4474aa41cf479e5a49296",
+      "End": "33b69676b97c428fa8aa4c1c07718b92",
+      "Id": "2aa63b211631466384d713520fc1297a",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "f6e51689332a4967bdb99e5da88b1988",
+      "End": "be5f47e30d6748a098c0aaf01f1f265c",
+      "Id": "0110e2267e12426eac6aa6cf6f13eca6",
       "IsHidden": "False"
     }
   ],
@@ -3624,28 +3909,28 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": 7196.176191846704,
-        "Y": 2576.7503394013393
+        "X": 6842.989895425286,
+        "Y": 2538.955495872848
       },
       {
         "Id": "52ac2ff7eb4a4a74a808610757aab14d",
-        "Name": "List.GetItemAtIndex",
+        "Name": "List.GetItemAtIndex (new names)",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": 7682.702744070188,
-        "Y": 1780.1847701213046
+        "X": 7344.249625709691,
+        "Y": 1786.9001097713144
       },
       {
         "Id": "7accfdeac1ed41b497c9a39feb163c2f",
-        "Name": "List.GetItemAtIndex",
+        "Name": "List.GetItemAtIndex (assembly objects)",
         "IsSetAsInput": false,
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": 7681.880230309758,
-        "Y": 1965.9001815903657
+        "X": 7343.427111949261,
+        "Y": 1972.6155212403755
       },
       {
         "Id": "12cf27ee7659486a8da171f19a68e280",
@@ -3714,8 +3999,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": -1321.7073005571847,
-        "Y": 260.0
+        "X": -1258.5586138297476,
+        "Y": -367.8903797793495
       },
       {
         "Id": "d163472496e84d86881024b6aa407c97",
@@ -3724,8 +4009,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": 1252.4708684533011,
-        "Y": 259.5912101594038
+        "X": 1315.619555180736,
+        "Y": -368.2991696199457
       },
       {
         "Id": "a89500e4d3ef4c999b3579b636845aa7",
@@ -3734,8 +4019,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": 2067.038905657474,
-        "Y": 257.772615681944
+        "X": 2130.187592384911,
+        "Y": -370.1177640974055
       },
       {
         "Id": "8f47ea0ec2544ed28e833d3fdb36b892",
@@ -3744,8 +4029,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": 4253.687301119781,
-        "Y": 257.36382584134776
+        "X": 4316.835987847218,
+        "Y": -370.5265539380017
       },
       {
         "Id": "21084c57f38040878fcef5e2c577ab5d",
@@ -3754,8 +4039,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": 4721.735350303569,
-        "Y": 260.15864032425384
+        "X": 4784.884037031006,
+        "Y": -367.73173945509564
       },
       {
         "Id": "465b519550a048aab6a18244baf76ecd",
@@ -3764,8 +4049,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": 9951.27650300236,
-        "Y": 264.96564780046674
+        "X": 10014.425189729796,
+        "Y": -362.92473197888273
       },
       {
         "Id": "cecbe71adcbd4e13a7d77d0b7762ffeb",
@@ -3774,8 +4059,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": 10568.84644074503,
-        "Y": 159.76543874197546
+        "X": 10606.676593950368,
+        "Y": -347.1586142095657
       },
       {
         "Id": "19b7d4c9949e4b8680c00cac7073d78b",
@@ -3784,8 +4069,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": 19049.26041994664,
-        "Y": 134.90356942368635
+        "X": 19087.090573151978,
+        "Y": -372.0204835278548
       },
       {
         "Id": "9aa64bc09f43432eae24a4fbeee2a481",
@@ -3794,8 +4079,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": 7328.09711088588,
-        "Y": 1887.725673750969
+        "X": 6989.6439925253835,
+        "Y": 1894.4410134009788
       },
       {
         "Id": "80a2793343814425a40a7e933ceee76c",
@@ -3904,8 +4189,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": -7309.71612553269,
-        "Y": 247.9201420690904
+        "X": -7246.567438805254,
+        "Y": -379.9702377102591
       },
       {
         "Id": "0b3b114771b54f67b8cdd4e6e9dc6e1c",
@@ -3914,8 +4199,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": -3962.5932405781928,
-        "Y": 235.24238848335108
+        "X": -3899.444553850757,
+        "Y": -392.6479912959984
       },
       {
         "Id": "de5484a4b63a4b8ea820209c4a7783fa",
@@ -3924,8 +4209,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": -3584.4410846356686,
-        "Y": 234.6521573964228
+        "X": -3521.2923979082334,
+        "Y": -393.23822238292666
       },
       {
         "Id": "0f4dd8fc15fc43c697eb2edab393017c",
@@ -3934,8 +4219,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": -1982.3195142250147,
-        "Y": 228.01247064301492
+        "X": -1919.170827497579,
+        "Y": -399.87790913633455
       },
       {
         "Id": "50fe1bf0cf2d4856be6c26060da4bd59",
@@ -4274,8 +4559,8 @@
         "IsSetAsOutput": false,
         "Excluded": false,
         "ShowGeometry": true,
-        "X": 14265.0,
-        "Y": 1214.0
+        "X": 14080.57402533233,
+        "Y": 1237.6696438076158
       },
       {
         "Id": "9f78d7ff907b4ce9abc76c75f197e374",
@@ -4286,6 +4571,66 @@
         "ShowGeometry": true,
         "X": 18352.22950845351,
         "Y": 774.0738391302749
+      },
+      {
+        "Id": "93f6c67cde2b4b3898a7a9ab28b501be",
+        "Name": "concat for action string",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 813.5360131311713,
+        "Y": 1231.3864939662787
+      },
+      {
+        "Id": "0bb807abcc9f4cf5ad355b5d7b61cf8d",
+        "Name": "concat for action string",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 495.41882394143886,
+        "Y": 2510.5086927395673
+      },
+      {
+        "Id": "b21eb5e279f14d11aa6afb5eae7c4b8a",
+        "Name": "Code Block",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 5199.480157230886,
+        "Y": 140.91294655061859
+      },
+      {
+        "Id": "ae095b60a613410aae8ccec5859a2498",
+        "Name": "Code Block",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 17882.405921560196,
+        "Y": 160.6611208674317
+      },
+      {
+        "Id": "73c40316ac8049709848f0b649c39c37",
+        "Name": "add apostrophes to clearly define names",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 15784.032204536283,
+        "Y": 880.1215460066952
+      },
+      {
+        "Id": "ebce88ce0aa84c83b27149292ec9b302",
+        "Name": "String.TrimTrailingWhitespace",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "ShowGeometry": true,
+        "X": 7718.941502399586,
+        "Y": 1784.3114179177612
       }
     ],
     "Annotations": [
@@ -4465,8 +4810,8 @@
         "HasNestedGroups": false,
         "Left": 2805.2869131173798,
         "Top": 1340.9005899445153,
-        "Width": 702.0,
-        "Height": 270.0,
+        "Width": 838.0,
+        "Height": 340.0,
         "FontSize": 36.0,
         "GroupStyleId": "00000000-0000-0000-0000-000000000000",
         "InitialTop": 1413.9005899445153,
@@ -4485,16 +4830,17 @@
           "1ceaf717061047b985d3cc9f8d7b1f33",
           "52ac2ff7eb4a4a74a808610757aab14d",
           "7accfdeac1ed41b497c9a39feb163c2f",
-          "9aa64bc09f43432eae24a4fbeee2a481"
+          "9aa64bc09f43432eae24a4fbeee2a481",
+          "ebce88ce0aa84c83b27149292ec9b302"
         ],
         "HasNestedGroups": false,
-        "Left": 7318.09711088588,
-        "Top": 1707.1847701213046,
-        "Width": 1290.6324648645086,
-        "Height": 420.7154114690611,
+        "Left": 6979.6439925253835,
+        "Top": 1711.3114179177612,
+        "Width": 1629.0855832250054,
+        "Height": 423.3041033226143,
         "FontSize": 36.0,
         "GroupStyleId": "00000000-0000-0000-0000-000000000000",
-        "InitialTop": 1780.1847701213046,
+        "InitialTop": 1784.3114179177612,
         "InitialHeight": 330.7154114690611,
         "TextblockHeight": 63.0,
         "Background": "#FFC1D676"
@@ -4537,13 +4883,13 @@
           "d163472496e84d86881024b6aa407c97"
         ],
         "HasNestedGroups": false,
-        "Left": -1331.7073005571847,
-        "Top": 114.59121015940377,
-        "Width": 2748.178169010486,
+        "Left": -1268.5586138297476,
+        "Top": -513.2991696199457,
+        "Width": 2748.1781690104835,
         "Height": 277.4087898405962,
         "FontSize": 96.0,
         "GroupStyleId": "bc688959-ce34-4bf5-90f8-6ddd23f80989",
-        "InitialTop": 259.5912101594038,
+        "InitialTop": -368.2991696199457,
         "InitialHeight": 145.40878984059623,
         "TextblockHeight": 135.0,
         "Background": "#FFA4E1FF"
@@ -4560,13 +4906,13 @@
           "8f47ea0ec2544ed28e833d3fdb36b892"
         ],
         "HasNestedGroups": false,
-        "Left": 2057.038905657474,
-        "Top": 112.36382584134776,
+        "Left": 2120.187592384911,
+        "Top": -515.5265539380017,
         "Width": 2360.6483954623072,
         "Height": 277.4087898405962,
         "FontSize": 96.0,
         "GroupStyleId": "bc688959-ce34-4bf5-90f8-6ddd23f80989",
-        "InitialTop": 257.36382584134776,
+        "InitialTop": -370.5265539380017,
         "InitialHeight": 145.40878984059623,
         "TextblockHeight": 135.0,
         "Background": "#FFA4E1FF"
@@ -4583,13 +4929,13 @@
           "465b519550a048aab6a18244baf76ecd"
         ],
         "HasNestedGroups": false,
-        "Left": 4711.735350303569,
-        "Top": 115.15864032425384,
-        "Width": 5403.541152698791,
+        "Left": 4774.884037031006,
+        "Top": -512.7317394550956,
+        "Width": 5403.54115269879,
         "Height": 281.8070074762129,
         "FontSize": 96.0,
         "GroupStyleId": "bc688959-ce34-4bf5-90f8-6ddd23f80989",
-        "InitialTop": 260.15864032425384,
+        "InitialTop": -367.73173945509564,
         "InitialHeight": 149.8070074762129,
         "TextblockHeight": 135.0,
         "Background": "#FFA4E1FF"
@@ -4606,13 +4952,13 @@
           "19b7d4c9949e4b8680c00cac7073d78b"
         ],
         "HasNestedGroups": false,
-        "Left": 10558.84644074503,
-        "Top": -10.09643057631365,
+        "Left": 10596.676593950368,
+        "Top": -517.0204835278548,
         "Width": 8654.41397920161,
         "Height": 301.8618693182891,
         "FontSize": 96.0,
         "GroupStyleId": "bc688959-ce34-4bf5-90f8-6ddd23f80989",
-        "InitialTop": 134.90356942368635,
+        "InitialTop": -372.0204835278548,
         "InitialHeight": 169.8618693182891,
         "TextblockHeight": 135.0,
         "Background": "#FFA4E1FF"
@@ -4700,13 +5046,13 @@
           "0b3b114771b54f67b8cdd4e6e9dc6e1c"
         ],
         "HasNestedGroups": false,
-        "Left": -7319.71612553269,
-        "Top": 90.24238848335108,
-        "Width": 3521.1228849544973,
+        "Left": -7256.567438805254,
+        "Top": -537.6479912959984,
+        "Width": 3521.122884954497,
         "Height": 289.6777535857393,
         "FontSize": 96.0,
         "GroupStyleId": "bc688959-ce34-4bf5-90f8-6ddd23f80989",
-        "InitialTop": 235.24238848335108,
+        "InitialTop": -392.6479912959984,
         "InitialHeight": 157.6777535857393,
         "TextblockHeight": 135.0,
         "Background": "#FFA4E1FF"
@@ -4723,13 +5069,13 @@
           "0f4dd8fc15fc43c697eb2edab393017c"
         ],
         "HasNestedGroups": false,
-        "Left": -3594.4410846356686,
-        "Top": 83.01247064301492,
-        "Width": 1776.121570410654,
+        "Left": -3531.2923979082334,
+        "Top": -544.8779091363346,
+        "Width": 1776.1215704106544,
         "Height": 283.6396867534079,
         "FontSize": 96.0,
         "GroupStyleId": "bc688959-ce34-4bf5-90f8-6ddd23f80989",
-        "InitialTop": 228.01247064301492,
+        "InitialTop": -399.87790913633455,
         "InitialHeight": 151.6396867534079,
         "TextblockHeight": 135.0,
         "Background": "#FFA4E1FF"
@@ -4847,7 +5193,8 @@
           "00d970ffd9d94c44a6f335d89a7e7281",
           "35f112f6e18543f48c71d15eeeda99a3",
           "08ef8e646a804493933989265dae8764",
-          "06cbb2de21774cbfa2057f5c23aa8bb0"
+          "06cbb2de21774cbfa2057f5c23aa8bb0",
+          "73c40316ac8049709848f0b649c39c37"
         ],
         "HasNestedGroups": false,
         "Left": 14809.560178532653,
@@ -4862,8 +5209,8 @@
         "Background": "#FFC1D676"
       }
     ],
-    "X": -13842.163413160846,
-    "Y": -10.847251147672296,
-    "Zoom": 0.7902965447341297
+    "X": -2834.7047016899865,
+    "Y": -61.323817966115826,
+    "Zoom": 0.41655567969386625
   }
 }
